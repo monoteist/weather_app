@@ -20,10 +20,9 @@ class WeatherAPIView(views.APIView):
         city = get_object_or_404(City, name__iexact=city_name)
 
         weather_data = get_weather(city.lat, city.lon)
-        
+
         if not weather_data:
             return Response({'error': 'Не удалось получить данные о погоде'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
         serializer = CitySerializer(city)
         city_data = serializer.data
