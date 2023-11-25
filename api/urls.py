@@ -1,10 +1,9 @@
-from django.urls import include, path 
-from rest_framework import routers 
+from django.urls import path 
+
+from .views import WeatherAPIView
 
 app_name = 'api' 
 
-router_v1 = routers.DefaultRouter()
-
 urlpatterns = [ 
-    path('v1/', include(router_v1.urls)), 
+    path('weather', WeatherAPIView.as_view(), name='weather'), 
 ]
