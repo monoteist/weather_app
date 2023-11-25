@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import status, views
 from rest_framework.response import Response
 
@@ -8,6 +10,7 @@ from weather.services import get_weather
 
 
 class WeatherAPIView(views.APIView):
+    @method_decorator(cache_page(60 * 30))
     def get(self, request):
         city_name = request.query_params.get('city')
 
