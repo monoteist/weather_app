@@ -8,6 +8,7 @@ POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 HOST = os.getenv('HOST')
 PORT = os.getenv('PORT')
 
+
 class DatabaseConnector:
     def __init__(self, dbname, user, password, host, port):
         self.dbname = dbname
@@ -20,7 +21,7 @@ class DatabaseConnector:
     def connect(self):
         if not self.connection:
             self.connection = psycopg2.connect(dbname=self.dbname, user=self.user, password=self.password,
-                                              host=self.host, port=self.port)
+                                               host=self.host, port=self.port)
         return self.connection
 
     def disconnect(self):
@@ -28,14 +29,16 @@ class DatabaseConnector:
             self.connection.close()
             self.connection = None
 
+
 db_connector = DatabaseConnector(dbname=DATABASE, user=POSTGRES_USER,
                                  password=POSTGRES_PASSWORD, host=HOST, port=PORT)
+
 
 def execute_query(query, fetch_all=True):
     connection = db_connector.connect()
     cursor = connection.cursor()
     cursor.execute(query)
-    
+
     if fetch_all:
         result = cursor.fetchall()
     else:
@@ -45,5 +48,3 @@ def execute_query(query, fetch_all=True):
     db_connector.disconnect()
 
     return result
-
-
