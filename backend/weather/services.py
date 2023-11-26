@@ -1,10 +1,7 @@
 import os
 from http import HTTPStatus
 
-from dotenv import load_dotenv
 import requests
-
-load_dotenv()
 
 YANDEX_WEATHER_API_KEY = os.getenv('YANDEX_WEATHER_API_KEY')
 BASE_WEATHER_URL = os.getenv('BASE_WEATHER_URL')
