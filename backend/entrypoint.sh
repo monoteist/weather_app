@@ -1,7 +1,7 @@
 #!/bin/sh 
 
-python backend/manage.py makemigrations
-python backend/manage.py migrate
-python backend/manage.py load_cities
+python app/manage.py makemigrations
+python app/manage.py migrate
+python app/manage.py load_cities
 
-exec "$@" 
+exec "$@"

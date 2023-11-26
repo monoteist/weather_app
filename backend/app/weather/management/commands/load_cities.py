@@ -7,7 +7,7 @@ class Command(BaseCommand):
     help = 'Load cities data from JSON file into the database'
 
     def handle(self, *args, **options):
-        file_path = "backend/weather/cities_with_coordinates.json"
+        file_path = "app/weather/cities_with_coordinates.json"
 
         with open(file_path, 'r', encoding='utf-8') as file:
             data = json.load(file)

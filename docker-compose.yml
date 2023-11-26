@@ -4,7 +4,7 @@ version: '3.7'
 services:
   api:
     build: ./backend
-    command: python backend/manage.py runserver 0.0.0.0:8000
+    command: python app/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
@@ -16,19 +16,21 @@ services:
 
   telegram_bot:
     build: ./telegram_bot
-    command: python telegram_bot/main.py runserver
+    command: python app/main.py runserver
     volumes:
       - .:/code
     depends_on:
       - postgres
+    env_file:
+      - ./.env
+  
   postgres:
     image: postgres:14
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     ports: 
       - 5432:5432
-    env_file:
-      - ./.env
+    
 
 volumes:
   postgres_data:
